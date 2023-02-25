@@ -3,12 +3,25 @@ const mongoose = require('mongoose');
 
 
 const ServiceSchema = mongoose.Schema({
-    name: String,
-    title: String,
-    state: String,
-    description: String,
-    comments: [String]
-
+    client: {
+      type: String,
+      required: [true, 'client is required']
+    },
+    title: {
+      type: String,
+      required: [true, 'title is required']
+    },
+    status: {
+      type: String,
+      required: [true, 'status is required']
+    },
+    description: {
+      type: String,
+      required: [true, 'description is required']
+    },
+    comments: {
+      type: Array
+    }
 }, {timestamps: true})
 
 const Service = mongoose.model('services', ServiceSchema)

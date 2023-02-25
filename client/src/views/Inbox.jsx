@@ -1,7 +1,21 @@
 import React from 'react'
 import Header from '../components/Header'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Inbox = () => {
+
+  const [services, setServices] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/services')
+    .then((res) => {
+      setServices(res.data);
+      
+    })
+  })
+
   return (
     <div>
       <Header />
@@ -15,7 +29,17 @@ const Inbox = () => {
           </tr>
         </thead>
         <tbody>
-
+          {
+            services.map((service, index) => {
+              return (
+                <tr key={index}>
+                  <td>fecha</td>
+                  <td><Link to={'/status/' + service._id}>{service.client}</Link></td>
+                  <td>{service.title}</td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </table>
       <h2>Servicios en tramite</h2>
