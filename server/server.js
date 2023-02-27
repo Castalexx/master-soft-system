@@ -1,13 +1,15 @@
 // Basicos del servidor
+require('dotenv').config()
 const express = require('express');
 const app = express();
-const PORT = 8000;
+const port = process.env.PORT || 8000;
 const cors = require('cors');
+
 
 // Iniciar server
 
-app.listen(PORT, () => {
-    console.log('Server run at port ' + PORT)
+app.listen(port, () => {
+    console.log('Server run at port ' + port)
 })
 
 // Configuracion para peticiones cruzadas y lectura de POST

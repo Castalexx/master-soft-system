@@ -8,7 +8,7 @@ module.exports = (app) => {
 
     app.post('/api/newservice', addService);
 
-    app.put('/api/service/:id', editService);
+    app.put('/api/editservice/:id', editService);
 
     app.delete('/api/service/:id', deleteService)
 

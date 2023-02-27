@@ -22,7 +22,7 @@ const App = () =>  {
           <Route path='/addservice' element={<AddService />}></Route>
           <Route path='/service/:id' element={<Service />}></Route>
           <Route path='/inbox' element={<Inbox />}></Route>
-          <Route path='/status/:id' element={<Status />}></Route>
+          <Route path='/status/:id' element={<Status/>}></Route>
           <Route></Route>
         </Routes>
       </BrowserRouter>

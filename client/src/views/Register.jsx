@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
+import axios from 'axios'
 
 const Register = () => {
 
@@ -8,7 +9,8 @@ const Register = () => {
     name: '',
     email: '',
     phone: '',
-    password: ''
+    password: '',
+    collaborator: false
   })
 
   const handleChange = (e) => {
@@ -32,7 +34,13 @@ const Register = () => {
         [name]: value
       })
     }
-    
+  }
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8000/api/registeruser', register)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
   }
 
   return (
@@ -40,7 +48,7 @@ const Register = () => {
       <Header />
       <div className='row p-5'>
         
-        <form className='col'>
+        <form className='col' onSubmit={handleRegister}>
           <h3>Register</h3>
           <div>
             <label htmlFor="">Soy</label>
@@ -67,7 +75,7 @@ const Register = () => {
           </div>
           <div>
             <label htmlFor="">Confirmar Contraseña</label>
-            <input type="password" name="cPassword" id="cPassword" onChange={handleChange}/>
+            <input type="password" name="cPassword" id="cPassword"/>
           </div>
           <button className='btn btn-primary' type='submit'>Registrar</button>
         </form>
@@ -75,12 +83,12 @@ const Register = () => {
         <form className='col'>
         <h3>Iniciar sesión</h3>
         <div>
-          <label htmlFor="">Correo</label>
-          <input type="email" name="" id="" />
+          <label htmlFor="emailLogin">Correo</label>
+          <input type="email" name="" id="emailLogin" />
         </div>
         <div>
-          <label htmlFor="">Contraseña</label>
-          <input type="password" name="" id="" />
+          <label htmlFor="passwordLogin">Contraseña</label>
+          <input type="password" name="" id="passwordLogin" />
         </div>
         <button className='btn btn-primary' type='submit'>Login</button>
         </form>

@@ -18,11 +18,8 @@ const addService = (req, res) => {
 
 const editService = (req, res) => {
     console.log(req.params.id)
-    Service.findByIdAndUpdate(req.params.id, { $set: {"description": req.body.description}})
-    .then((response) => {
-        res.json(response);
-    })
-    .catch(res.json('No Updated'))
+    Service.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description}})
+    .then((response) => res.json(response))
 }
 
 const deleteService = (req, res) => {
