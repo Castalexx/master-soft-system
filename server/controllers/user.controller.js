@@ -13,7 +13,6 @@ module.exports = {
         res.status(200).cookie('userToken', userToken, {httpOnly:true, expires: new Date(Date.now() + 90000)})
         .json({successMessage: "Registered User", user:newUser})
       }catch(error){
-        
         res.status(404).json(error)
       }
     },
