@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import Header from '../components/Header'
-import axios from 'axios'
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import axios from 'axios';
 
 const Register = () => {
 
@@ -12,6 +12,12 @@ const Register = () => {
     password: '',
     collaborator: false
   })
+
+  const [login, setLogin] = useState({
+    emailLogin: '',
+    passwordLogin: ''
+  })
+
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -39,6 +45,25 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     axios.post('http://localhost:8000/api/registeruser', register)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+  }
+
+
+  const handleChangeLogin = (e) => {
+    const {name, value} = e.target
+    setLogin({
+      ...login,
+      [name]: value
+    })
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8000/api/login', {
+      email: login.emailLogin,
+      password: login.passwordLogin
+    })
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
   }
@@ -80,15 +105,15 @@ const Register = () => {
           <button className='btn btn-primary' type='submit'>Registrar</button>
         </form>
         
-        <form className='col'>
+        <form className='col' onSubmit={handleLogin}>
         <h3>Iniciar sesión</h3>
         <div>
           <label htmlFor="emailLogin">Correo</label>
-          <input type="email" name="" id="emailLogin" />
+          <input type="email" name="emailLogin" id="emailLogin" value={login.emailLogin} onChange={handleChangeLogin} />
         </div>
         <div>
           <label htmlFor="passwordLogin">Contraseña</label>
-          <input type="password" name="" id="passwordLogin" />
+          <input type="password" name="passwordLogin" id="passwordLogin" value={login.passwordLogin} onChange={handleChangeLogin} />
         </div>
         <button className='btn btn-primary' type='submit'>Login</button>
         </form>
