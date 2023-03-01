@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
         <h3>Registrese como empresa/particular</h3>
         <Link to={'/register'}><button>Registrarse/ Iniciar Sesión</button></Link>
       </div>
+      <Footer />
     </div>
   )
 }

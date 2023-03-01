@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Footer from '../components/Footer'
+import { AxiosHeaders } from 'axios'
 
 const Home = () => {
 
-  const [services, setServices] = useState([])
+  const navegar = useNavigate()
+
+  const [services, setServices] = useState({user:{name:''}, services: []});
+  const [loading, setLoading] = useState(false)
+  const user = localStorage.getItem('user')
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/services')
+    axios.get('http://localhost:8000/api/services', {headers: {...AxiosHeaders, user: user}} )
     .then((res) => {
       setServices(res.data);
-      
+      setLoading(true)
     })
   })
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    navegar('/register')
+  }
   
   return (
     <div>
       <Header />
-      <div className='center'>
-        <h2>Nombre de la empresa</h2>
+      <div className='w-75 mx-auto'>
+        <h2>{services.user.name}</h2>
+        <button className='btn btn-secondary' onClick={handleLogout}>Logout</button>
         <Link to={'/addservice'}><button className='btn btn-primary'>Solicitar servicio</button></Link>
         <h4>Servicios solicitados</h4>
-        <table>
+        <table className='table table-striped'>
           <thead>
             <tr>
               <th>Fecha</th>
@@ -32,10 +45,10 @@ const Home = () => {
           </thead>
           <tbody>
             {
-              services.map((service, index) => {
+            services.services.map((service, index) => {
                 return (
                   <tr key={index}>
-                    <td>fecha</td>
+                    <td>{service.date}</td>
                     <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
                     <td>{service.status}</td>
                   </tr>
@@ -45,7 +58,7 @@ const Home = () => {
           </tbody>
         </table>
         <h4>Servicios en tramites</h4>
-        <table>
+        <table className='table table-striped'>
           <thead>
             <tr>
               <th>Fecha</th>
@@ -58,6 +71,7 @@ const Home = () => {
           </tbody>
         </table>
       </div>
+      <Footer />
 		</div>
   )
 }

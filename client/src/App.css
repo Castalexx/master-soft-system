@@ -1,4 +1,25 @@
+body {
+    background-color: #EBF5EE;
+}
 
+footer {
+    text-align: center;
+    padding: 10px;
+    color: #EBF5EE;
+    background-color: #1d1d1d;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+footer > * {
+    padding: 3px;
+    display: inline-block;
+}
+
+.bg-grad {
+    background: linear-gradient(185deg, rgba(2,0,36,1) 0%, rgba(9,119,121,1) 100%)
+}
 
 .display-off {
     display: none;

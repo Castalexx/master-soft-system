@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 
 
 const ServiceSchema = mongoose.Schema({
-    client: {
+    idClient: {
+    type: String,
+    required: [true, 'id of client is required'],
+    },
+    date: {
       type: String,
-      required: [true, 'client is required']
+      required: [true, 'date is required']
     },
     title: {
       type: String,

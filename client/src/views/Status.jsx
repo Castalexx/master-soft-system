@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 const Status = () => {
 
@@ -73,23 +75,31 @@ const Status = () => {
 
   return (
     <div>
-      <h2>{service.client}</h2>
-      <h3>{service.title}</h3>
-      <h3>Description</h3>
-      <p className={display1}>{service.description}</p>
-      <form className={display} onSubmit={handleSubmit}>
-      <input name='description' value={description} onChange={handleChange}/>
-      <button className='btn btn-success'>Guardar</button>
-      </form>
-      <button className={display1 + ' btn btn-dark'} onClick={showEditDescription} >Edit</button>
-      <h3>Comentarios</h3>
-      {
-        service.comments.map((comment, index) => {
-          return (
-            <p key={index}>•{comment}</p>
-          )
-        })
-      }
+      <Header />
+      <div className='grid w-50 mx-auto'>
+        <h2>{service.client}</h2>
+        <h3>{service.title}</h3>
+        <h3>Description</h3>
+        <p className={display1}>{service.description}</p>
+        <form className={display} onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="" className='form-label'>Editar</label>
+            <input classname='form-control' name='description' value={description} onChange={handleChange}/>
+          </div>
+        <button className='btn btn-success'>Guardar</button>
+        </form>
+        <button className={display1 + ' btn btn-dark'} onClick={showEditDescription} >Edit</button>
+        <h3>Comentarios</h3>
+        {
+          service.comments.map((comment, index) => {
+            return (
+              <p key={index}>•{comment}</p>
+            )
+          })
+        }
+      </div>
+      
+      <Footer />
     </div>
   )
 }

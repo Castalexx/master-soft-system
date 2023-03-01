@@ -5,6 +5,7 @@ import AddService from './views/AddService'
 import Home from './views/Home'
 import Inbox from './views/Inbox'
 import Index from './views/Index'
+import NotFound from './views/NotFound'
 import Register from './views/Register'
 import Service from './views/Service'
 import Status from './views/Status'
@@ -23,7 +24,7 @@ const App = () =>  {
           <Route path='/service/:id' element={<Service />}></Route>
           <Route path='/inbox' element={<Inbox />}></Route>
           <Route path='/status/:id' element={<Status/>}></Route>
-          <Route></Route>
+          <Route path='*' element={<NotFound/>}></Route>
         </Routes>
       </BrowserRouter>
       

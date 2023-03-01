@@ -14,7 +14,8 @@ app.listen(port, () => {
 
 // Configuracion para peticiones cruzadas y lectura de POST
 app.use(cors({
-    origin:'http://127.0.0.1:5173'
+    origin:'http://127.0.0.1:5173',
+    credentials: true
 }));
 
 app.use(express.json()); 

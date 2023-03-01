@@ -1,8 +1,20 @@
 const Service = require('../models/service.model')
+const User = require('../models/users.model')
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.KEYJWT
+
+
 
 const getServices = (req, res) => {
-    Service.find()
-    .then((response) => res.json(response))
+    const token = req.headers.user
+    const user = jwt.verify(token, SECRET)
+    User.findById(user._id)
+    .then((response) => {   
+        Service.find({idClient: user._id})
+        .then((respon) => {
+            res.json({user: response, services: respon})
+        })
+    })
 }
 
 const getOneService = (req, res) => {
