@@ -1,4 +1,4 @@
-const { addService, getServices, getOneService, editService, deleteService } = require('../controllers/service.controller');
+const { addService, getServices, getOneService, editService, deleteService, getAllServices } = require('../controllers/service.controller');
 
 module.exports = (app) => {
 
@@ -11,5 +11,7 @@ module.exports = (app) => {
     app.put('/api/editservice/:id', editService);
 
     app.delete('/api/service/:id', deleteService)
+
+    app.get('/api/internal/services', getAllServices)
 
 }

@@ -17,6 +17,16 @@ footer > * {
     display: inline-block;
 }
 
+
+.bg-i {
+    background-image: url('./img/board.jpg');
+    width: 100vw;
+    height: 600px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    display: flex;
+}
 .bg-grad {
     background: linear-gradient(185deg, rgba(2,0,36,1) 0%, rgba(9,119,121,1) 100%)
 }

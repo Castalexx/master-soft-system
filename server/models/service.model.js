@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 
 
 const ServiceSchema = mongoose.Schema({
+    client: {
+      type: String,
+      required: [true, 'client is required']
+    },
     idClient: {
     type: String,
     required: [true, 'id of client is required'],

@@ -2,3 +2,5 @@
 
 # Peticion infinita en el server
 
+# Retornar un 404 si no encuentra el usuario
+

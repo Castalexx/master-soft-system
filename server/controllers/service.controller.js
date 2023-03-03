@@ -40,7 +40,21 @@ const deleteService = (req, res) => {
     .catch((err) => res.json('No Deleted' + err))
 }
 
+const getAllServices = (req, res) => {
+    const token = req.headers.user
+    const user = jwt.verify(token, SECRET)
+    User.findById(user._id)
+    .then((response) => {   
+        if(response.collaborator == true) {
+            Service.find()
+            .then((respon) => res.json(respon))
+        } else {
+            res.status(401).json({error: 'No estas autorizado' })
+        }
+    })
+}
+
 
 module.exports = {
-    getServices, getOneService, addService, editService, deleteService
+    getServices, getOneService, addService, editService, deleteService, getAllServices
 }

@@ -40,9 +40,32 @@ module.exports = {
             const userToken = jwt.sign({_id: user._id}, SECRET) 
             res.json({accessToken: userToken}).status(200)
           }
-  
       }catch(error){
         console.log(error)
       }
-  }
+    },
+
+    loginUserInternal: async (req, res)=>{
+      const user = await User.findOne({email:req.body.email})
+      if(!user){
+          res.status(400).json({error: "Email no existe"})
+      }
+      try{
+          const passwordValida = await bcrypt.compare(req.body.password, user.password)
+          if(!passwordValida){
+              res.status(400).json({error: "Password incorrecto"})
+          }else{
+            if(!user.collaborator) {
+              res.status(400).json({error:'No es colaborador'})
+            } else {
+              const userToken = jwt.sign({_id: user._id}, SECRET) 
+              res.json({accessToken: userToken}).status(200)
+              
+            }
+            
+          }
+      }catch(error){
+        console.log(error)
+      }
+    }
   }

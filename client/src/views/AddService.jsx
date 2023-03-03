@@ -12,7 +12,8 @@ const AddService = () => {
     if(service.idClient !== res.data._id) {
       setService({
         ...service,
-        idClient: res.data._id
+        idClient: res.data._id,
+        client: res.data.name
       })
     }
     
@@ -27,8 +28,8 @@ const AddService = () => {
     status: '',
     description: '',
     comments: '',
-    idClient: 0
-
+    idClient: 0,
+    client: ''
   })
 
   
@@ -46,7 +47,7 @@ const AddService = () => {
     const date = new Date().toLocaleDateString();
     axios.post('http://localhost:8000/api/newservice', {
       ...service,
-      date: date
+      date: date,
     })
     .then(navigate('/home'))
   }

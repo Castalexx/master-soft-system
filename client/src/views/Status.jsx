@@ -84,7 +84,7 @@ const Status = () => {
         <form className={display} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="" className='form-label'>Editar</label>
-            <input classname='form-control' name='description' value={description} onChange={handleChange}/>
+            <input className='form-control' name='description' value={description} onChange={handleChange}/>
           </div>
         <button className='btn btn-success'>Guardar</button>
         </form>
