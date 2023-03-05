@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import React from 'react'
 import { useForm } from '../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
 
-const Access = () => {
-
-  const navegar = useNavigate()
+const Login = () => {
 
   const initialForm = {
     email: '',
@@ -35,33 +30,37 @@ const Access = () => {
     return errors
   } 
 
-  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit} = useForm(initialForm, validationsForm, 'access')
-
+  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit} = useForm(initialForm, validationsForm, 'login')
 
   return (
-    <div>
-      <Header />
-      <form className='col w-25 mx-auto' onSubmit={handleSubmit}>
+    <div className='col px-5'>
+      <form className='col w-75' onSubmit={handleSubmit}>
         <h3>Iniciar sesión</h3>
         <div>
-          <label htmlFor="email" className='form-label'>Correo</label>
-          <input type="email" name="email" id="email" value={form.email} onChange={handleChange} className='form-control' />
+          <label className='form-label'>Correo</label>
+          <input type="text" name="email" className='form-control' onChange={handleChange} />
           {
             errors.email && <p className='text-danger'>{errors.email}</p>
           }
         </div>
         <div>
-          <label htmlFor="password" className='form-label'>Contraseña</label>
-          <input type="password" name="password" id="password" value={form.password} onChange={handleChange} className='form-control'/>
+          <label className='form-label'>Contraseña</label>
+          <input type="password" name="password" className='form-control' onChange={handleChange}/>
           {
             errors.password && <p className='text-danger'>{errors.password}</p>
           }
         </div>
         <button className='btn btn-primary' type='submit'>Login</button>
-        </form>
-        <Footer />  
+        {
+        loading && <p>Cargando</p>
+        }
+        {
+        response && <p>{response}</p>
+        }
+      </form>
     </div>
+      
   )
 }
 
-export default Access
+export default Login

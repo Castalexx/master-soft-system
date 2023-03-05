@@ -30,8 +30,13 @@ const addService = (req, res) => {
 
 const editService = (req, res) => {
     console.log(req.params.id)
-    Service.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description}})
-    .then((response) => res.json(response))
+    if(req.body.key == 'description'){
+        Service.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description}})
+        .then((response) => res.json(response))
+    }else {
+        Service.findByIdAndUpdate(req.params.id, {$set: {status: req.body.status}})
+        .then((response) => res.json(response))
+    }
 }
 
 const deleteService = (req, res) => {

@@ -7,8 +7,8 @@ import Home from './views/Home'
 import Inbox from './views/Inbox'
 import Index from './views/Index'
 import NotFound from './views/NotFound'
-import Register from './views/Register'
 import Service from './views/Service'
+import SignupLogin from './views/SignupLogin'
 import Status from './views/Status'
 
 const App = () =>  {
@@ -20,7 +20,7 @@ const App = () =>  {
         <Routes>
           <Route path='/' element={<Index />}></Route>
           <Route path='/home' element={<Home />}></Route>
-          <Route path='/register' element={<Register />}></Route>
+          <Route path='/register' element={<SignupLogin />}></Route>
           <Route path='/addservice' element={<AddService />}></Route>
           <Route path='/service/:id' element={<Service />}></Route>
           <Route path='/inbox' element={<Inbox />}></Route>

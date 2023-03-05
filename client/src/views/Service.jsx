@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link} from 'react-router-dom'
 import axios from 'axios'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -31,6 +31,7 @@ const Service = () => {
   return (
     <div>
       <Header />
+      <Link to='/home'><button className='btn btn-outline-secondary'>Volver a Home</button></Link>
       <div className='grid w-50 mx-auto'>
         <h3>{service.title}</h3>
         <h3>Estado</h3>
