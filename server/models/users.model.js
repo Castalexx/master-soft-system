@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const UserSchema = mongoose.Schema({
+    admin: Boolean,
     name: {
       type: String,
       required: [true, "Name is required"]
     },
     business: {
       type: Boolean,
-      required: [true, 'business is required']
+      required: false
     },  
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: true,
       minlength: [8, "Password must be 8 characters or longer"]
     },
     phone: {
       type: Number,
-      required: [true, "Phone is required"]
+      required: false
     },
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: false,
       validate: {
         validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
         message: "Please enter a valid email"
@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema({
     },
     collaborator: {
       type: Boolean,
-      required: [true, `It's a collaborator?`]
+      required: false
     }
 }, {timestamps: true})
 

@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
+import toast, {Toaster} from 'react-hot-toast';
 
 const Register = () => {
 
@@ -64,7 +65,7 @@ const Register = () => {
 
   return (
       <div className='col px-5'>
-        
+        <Toaster />
         <form className='row w-75' onSubmit={handleSubmit}>
           <h3>Register</h3>
           <div className='col-md-6'>
@@ -112,12 +113,6 @@ const Register = () => {
             
           </div>
           <button id='register' className='btn btn-primary w-25 mx-auto my-3' type='submit' >Registrar</button>
-          {
-          loading && <p>Cargando</p>
-          }
-          {
-          response && <p>{response}</p>
-          }
         </form>
       </div>
   )

@@ -9,20 +9,17 @@ const Access = () => {
   const navegar = useNavigate()
 
   const initialForm = {
-    email: '',
+    name: '',
     password: '',
   }
 
   const validationsForm = (form) => {
     let errors = {};
-    let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    const {email, password} = form
+    const {name, password} = form
     
-    if(!regexEmail.test(email)){
-      errors.email = 'Complete un email valido'
-    }
-    if(!email.trim()){
-      errors.email = 'Complete su email'
+    
+    if(!name.trim()){
+      errors.name = 'Complete su user'
     }
     if(password.length < 8) {
       errors.password = 'La contraseña debe tener 8 caracteres como minimo'
@@ -32,7 +29,7 @@ const Access = () => {
     }
     
 
-    return errors
+    return errors;
   } 
 
   const {form, errors, loading, response, handleChange, handleBlur, handleSubmit} = useForm(initialForm, validationsForm, 'access')
@@ -44,10 +41,10 @@ const Access = () => {
       <form className='col w-25 mx-auto' onSubmit={handleSubmit}>
         <h3>Iniciar sesión</h3>
         <div>
-          <label htmlFor="email" className='form-label'>Correo</label>
-          <input type="email" name="email" id="email" value={form.email} onChange={handleChange} className='form-control' />
+          <label htmlFor="name" className='form-label'>User</label>
+          <input type="text" name="name" id="name" value={form.name} onChange={handleChange} className='form-control' />
           {
-            errors.email && <p className='text-danger'>{errors.email}</p>
+            errors.name && <p className='text-danger'>{errors.name}</p>
           }
         </div>
         <div>
@@ -58,6 +55,9 @@ const Access = () => {
           }
         </div>
         <button className='btn btn-primary' type='submit'>Login</button>
+        {
+          !errors.password && !errors.email && <p className='text-danger'>{response}</p>
+        }
         </form>
         <Footer />  
     </div>

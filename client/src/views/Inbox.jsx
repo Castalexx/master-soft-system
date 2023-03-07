@@ -47,7 +47,7 @@ const Inbox = () => {
       return (
         <div>
           <Header />
-          <button className='btn btn-secondary' onClick={handleLogout}>Logout</button>
+          <button className='btn btn-secondary m-2' onClick={handleLogout}>Logout</button>
           <div className='w-75 mx-auto'>
             <h2>Servicios pendientes de respuesta</h2>
             <table className='table table-striped'>

@@ -1,30 +1,23 @@
-• Agregar validacion de datos a todos los formularios
+[✔] Agregar validacion de datos a todos los formularios
 
-• Crear estado de loading para las paginas
+[] Crear estado de loading para las paginas con los toast
 
-• Mejorar visualizacion de servicios en la tabla y en su pagina de detalle
+[] Hacer validacion 
 
-• Agregar iconos interactivos
+[] Mejorar visualizacion de servicios en la tabla y en su pagina de detalle
 
+[] Agregar iconos interactivos
 
+[] Hacer validacion de datos en un helper
 
+[] Crear respuesta de front por datos no validos
 
+[] Migrar del localStorage a Cookies
 
+[] Subir a AWS
 
-
-
-
-
-
-
-
-
+[] Hacer clave de registro de funcionarios
 
 
 
 
-
-• Hacer validacion de datos en un helper
-
-
-• Crear respuesta de front por datos no validos

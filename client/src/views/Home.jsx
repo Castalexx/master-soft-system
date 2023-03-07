@@ -4,9 +4,13 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { AxiosHeaders } from 'axios'
+import toast, { Toaster } from 'react-hot-toast'
+
+
 
 const Home = () => {
 
+  
   const navegar = useNavigate()
 
   const [services, setServices] = useState({user:{name:''}, services: []});
@@ -33,8 +37,9 @@ const Home = () => {
   return (
     <div>
       <Header />
+      <Toaster />
       <div className='w-75 mx-auto'>
-        <h2 className='linea-bloque'>{services.user.name}</h2>
+        <h2 className='linea-bloque m-2'>{services.user.name}</h2>
         <button className='btn btn-secondary linea-bloqueada' onClick={handleLogout}>Logout</button>
         <Link to={'/addservice'}><button className='btn btn-primary bloque'>Solicitar servicio</button></Link>
         <h4>Servicios solicitados</h4>

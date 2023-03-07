@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { AxiosHeaders } from 'axios'
 import { useForm } from '../hooks/useForm'
+import toast, {Toaster} from 'react-hot-toast';
 
 
 const AddService = () => {
@@ -78,6 +79,7 @@ const AddService = () => {
 
   return (
     <div>
+      <Toaster />
       <Header />
       <Link to='/home'></Link>
       <h2 className='text-center'>Solicitud de servicio</h2>
@@ -100,12 +102,6 @@ const AddService = () => {
           }
           <button type="submit" className='btn btn-primary mt-3'>Enviar solicitud</button>
 
-          {
-            loading && <p>Cargando...</p>
-          }
-          {
-            response && <p>{response}</p>
-          }
         
       </form>
       <Footer />

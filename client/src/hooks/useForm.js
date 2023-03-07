@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
+import toast, {Toaster} from 'react-hot-toast';
 
 export const useForm = (initialForm, validateForm, origin) => {
 
@@ -29,77 +30,96 @@ export const useForm = (initialForm, validateForm, origin) => {
 
   const handleSubmit = (e) => {
     setErrors(validateForm(form));
+    setLoading(true)
     e.preventDefault();
+    toast.loading('Cargando')
+    setTimeout(loadingHandler, 2000)
     
-    if(Object.keys(errors).length === 0) {
-      if(!empty) {
-        setLoading(true)
-        if(origin == 'register') {
-          const {business} = form
-          Boolean(business)
-          axios.post('http://localhost:8000/api/registeruser', {
-          ...form,
-          collaborator: false
-          }, {withCredentials: true, credentials:'include'})
-          .then((res) => {
-            setLoading(false);
-            setResponse("Creado con exito")
-            localStorage.setItem('user', res.data.accessToken)
-            navegar('/home')
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            setResponse("No fue creado")
-          })
-        } else if (origin == 'login'){
-          const {business} = form
-          Boolean(business)
-          axios.post('http://localhost:8000/api/login', form, {withCredentials: true, credentials:'include'})
-          .then((res) => {  
-            setLoading(false);
-            setResponse("Inicio de sesion exitoso")
-            localStorage.setItem('user', res.data.accessToken)
-            navegar('/home')
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            setResponse("Fallido")
-          })
-        } else if(origin == 'addservice') {
-          axios.post('http://localhost:8000/api/newservice', form, {withCredentials: true, credentials:'include'})
-          .then((res) => {  
-            setLoading(false);
-            setResponse("Servicio enviado")
-            console.log(res)
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            setResponse("Fallido")
-          })
-          
-        }else {
-          axios.post('http://localhost:8000/api/login/internal', form, {withCredentials: true, credentials:'include'})
-          .then((res) => {  
-            setLoading(false);
-            setResponse("Logueado")
-            console.log(res)
-            localStorage.setItem('user', res.data.accessToken)
-            navegar('/inbox')
-          })
-          .catch((err) => {
-            console.log(err);
-            setLoading(false);
-            setResponse("Fallido")
-          })
+    
+    function loadingHandler() {
+      if(Object.keys(errors).length === 0) {
+        if(!empty) {
+          setLoading(true);
+          if(origin == 'register') {
+            const {business} = form
+            Boolean(business)
+            axios.post('http://localhost:8000/api/registeruser', {
+            ...form,
+            collaborator: false
+            }, {withCredentials: true, credentials:'include'})
+            .then((res) => {
+              toast.remove()
+              setLoading(false);
+              setResponse("Creado con exito");
+              localStorage.setItem('user', res.data.accessToken);
+              toast.success('Usuario Registrado con exito')
+              navegar('/home');
+              
+            })
+            .catch((err) => {
+              console.log(err);
+              setLoading(false);
+              setResponse("No fue creado")
+            })
+          } else if (origin == 'login'){
+            const {business} = form
+            Boolean(business)
+            axios.post('http://localhost:8000/api/login', form, {withCredentials: true, credentials:'include'})
+            .then((res) => {  
+              setLoading(false);
+              setResponse("Inicio de sesion exitoso")
+              localStorage.setItem('user', res.data.accessToken)
+              toast.remove()
+              navegar('/home')
+            })
+            .catch((err) => {
+              toast.remove();
+              console.log(err);
+              setLoading(false);
+              setResponse("Fallido")
+              toast.error('Correo y/o contraseña incorrrectos')
+            })
+          } else if(origin == 'addservice') {
+            axios.post('http://localhost:8000/api/newservice', form, {withCredentials: true, credentials:'include'})
+            .then((res) => { 
+              toast.remove()
+              setLoading(false);
+              setResponse("Servicio enviado")
+              console.log(res)
+              setForm(initialForm)
+              toast.success('Servicio creado correctamente')
+            })
+            .catch((err) => {
+              toast.remove()
+              console.log(err);
+              setLoading(false);
+              setResponse("Fallido")
+              toast.error('Servicio no fue creado')
+            })
+            
+          }else {
+            axios.post('http://localhost:8000/api/login/internal', form, {withCredentials: true, credentials:'include'})
+            .then((res) => {  
+              setLoading(false);
+              setResponse("Logueado")
+              localStorage.setItem('user', res.data.accessToken)
+              navegar('/inbox')
+            })
+            .catch((err) => {
+              setLoading(false);
+              setResponse("No autorizado")
+              console.log(err)
+            })
+          }
         }
+        
+      } else {
+        console.log('no funciona');
+        setLoading(false);
+        toast.remove()
       }
-      
-    } else {
-      return;
     }
+    
   }
 
   return {

@@ -50,13 +50,7 @@ const Login = () => {
             errors.password && <p className='text-danger'>{errors.password}</p>
           }
         </div>
-        <button className='btn btn-primary' type='submit'>Login</button>
-        {
-        loading && <p>Cargando</p>
-        }
-        {
-        response && <p>{response}</p>
-        }
+        <button className='btn btn-primary' type='submit'>Login</button>  
       </form>
     </div>
       

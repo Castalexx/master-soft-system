@@ -50,7 +50,7 @@ const getAllServices = (req, res) => {
     const user = jwt.verify(token, SECRET)
     User.findById(user._id)
     .then((response) => {   
-        if(response.collaborator == true) {
+        if(response.admin == true) {
             Service.find()
             .then((respon) => res.json(respon))
         } else {
