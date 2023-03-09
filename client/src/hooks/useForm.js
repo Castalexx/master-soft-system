@@ -38,6 +38,7 @@ export const useForm = (initialForm, validateForm, origin) => {
     
     function loadingHandler() {
       if(Object.keys(errors).length === 0) {
+        toast.remove()
         if(!empty) {
           setLoading(true);
           if(origin == 'register') {
@@ -60,7 +61,9 @@ export const useForm = (initialForm, validateForm, origin) => {
               console.log(err);
               setLoading(false);
               setResponse("No fue creado")
+              toast.error('Usuario no fue creado')
             })
+            
           } else if (origin == 'login'){
             const {business} = form
             Boolean(business)
@@ -116,7 +119,8 @@ export const useForm = (initialForm, validateForm, origin) => {
       } else {
         console.log('no funciona');
         setLoading(false);
-        toast.remove()
+        
+        
       }
     }
     

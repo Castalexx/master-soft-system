@@ -1,6 +1,7 @@
 [✔] Agregar validacion de datos a todos los formularios
 
-[] Crear estado de loading para las paginas con los toast
+[] Crear estado de loading para las paginas con los toast, usar el Toaster
+   en el componente principal para renderizar en todas las rutas
 
 [] Hacer validacion 
 
